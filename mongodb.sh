@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./coomon.sh
+source ./common.sh
 
 check_root
 
