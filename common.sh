@@ -12,6 +12,7 @@ SCRIPT_DIR=$PWD
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 START_TIME=$(date +%s)
 MONGODB_HOST=mongodb.daws96s.fun
+MYSQL_HOST=mysql.daws96s.fun
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executed at: $(date)"  | tee -a $LOG_FILE
@@ -41,6 +42,15 @@ nodejs_setup(){
     VALIDATE $? "Installing NodeJS"
     npm install  &>>$LOG_FILE
     VALIDATE $? "Install dependencies"
+}
+
+java_setup(){
+    dnf install maven -y &>>$LOG_FILE
+    VALIDATE $? "Installing Maven"
+    mvn clean package  &>>$LOG_FILE
+    VALIDATE $? "Packing the application"
+    mv target/shipping-1.0.jar shipping.jar 
+    VALIDATE $? "Renaming the artifact"
 }
 
 app_setup(){
