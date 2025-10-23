@@ -50,7 +50,7 @@ app_setup(){
         VALIDATE $? "Creating system user"
     else 
         echo -e "User already exist ... $Y SKIPPING $N"
-    fi
+    fi 
     mkdir -p /app 
     VALIDATE $? "Creating app directory"
 
